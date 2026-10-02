@@ -193,7 +193,8 @@
       document.getElementById("chat").style.display = "block";
       document.getElementById("roomCode").textContent = roomId;
 
-      ws = new WebSocket(`ws://${location.host}/ws/${roomId}?name=${encodeURIComponent(username)}`);
+      const proto = location.protocol === "https:" ? "wss" : "ws";
+      ws = new WebSocket(`${proto}://${location.host}/ws/${roomId}?name=${encodeURIComponent(username)}`);
 
       ws.onmessage = (event) => {
         const msg = JSON.parse(event.data);
